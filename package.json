@@ -13,6 +13,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "compile-graphql": "relay-compiler --schema scripts/schema.graphql --src src",
     "fetch-schema": "node scripts/fetch-schema.js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
