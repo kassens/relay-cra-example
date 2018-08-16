@@ -8,13 +8,15 @@
     "react-dom": "^16.4.2",
     "react-relay": "^1.7.0-rc.1",
     "react-scripts": "^2.0.0-next.3e165448",
-    "relay-compiler": "^1.7.0-rc.1"
+    "relay-compiler": "^1.7.0-rc.1",
+    "serve": "^9.6.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "compile-graphql": "relay-compiler --schema scripts/schema.graphql --src src",
     "fetch-schema": "node scripts/fetch-schema.js",
+    "now-start": "serve --single ./build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
