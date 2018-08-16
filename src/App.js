@@ -1,17 +1,40 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import graphql from "babel-plugin-relay/macro";
+import Pokemon from "./Pokemon";
+import { QueryRenderer } from "react-relay";
+
+import PokemonEnvironment from "./PokemonEnvironment.js";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
         <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
+          <QueryRenderer
+            environment={PokemonEnvironment}
+            query={graphql`
+              query AppQuery {
+                pokemons(first: 10) {
+                  id
+                  ...Pokemon_pokemon
+                }
+              }
+            `}
+            render={({ props, error }) => {
+              if (error) {
+                return "error";
+              }
+              if (props) {
+                return props.pokemons.map(pokemon => (
+                  <div key={pokemon.id}>
+                    <Pokemon pokemon={pokemon} />
+                  </div>
+                ));
+              }
+              return "loading";
+            }}
+          />
         </p>
       </div>
     );
